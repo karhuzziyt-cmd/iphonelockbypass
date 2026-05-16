@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iCloud Activation Lock Bypass</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            color: #86868b;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #515154;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d2d2d7;
+            border-radius: 10px;
+            font-size: 16px;
+            background-color: #fbfbfd;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            border-color: #0071e3;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #0071e3;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #0077ed;
+        }
+
+        .btn:disabled {
+            background-color: #99c9f7;
+            cursor: not-allowed;
+        }
+
+        /* Laitteen tunnistuspaneeli */
+        .device-panel {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border: 2px solid #0071e3;
+            border-radius: 15px;
+            background-color: #f5faff;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .device-panel img {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .device-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .device-info {
+            font-size: 14px;
+            color: #515154;
+            margin-bottom: 5px;
+        }
+
+        /* Latauspalkki */
+        .progress-container {
+            display: none;
+            margin-top: 25px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #e5e5ea;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 12px;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background-color: #34c759;
+            transition: width 0.1s linear;
+        }
+
+        .status-text {
+            font-size: 14px;
+            color: #86868b;
+            font-weight: 500;
+        }
+
+        /* Onnistumisviesti */
+        .success-message {
+            display: none;
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #eafaf1;
+            border: 1px solid #34c759;
+            border-radius: 10px;
+            color: #1a7f37;
+            font-weight: 600;
+            font-size: 16px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .disclaimer {
+            font-size: 11px;
+            color: #b6b6b9;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Activation Lock Bypass</h1>
+    <p class="subtitle">This only works for ios 12- 17 we are soon going to ios 18-26</p>
+
+    <!-- PÄÄLOMAKE: Syötteet ja tunnistuspainike -->
+    <form id="identifyForm" onsubmit="identifyDevice(event)">
+        <div class="form-group">
+            <label for="model">iPhone Model</label>
+            <select id="model" required>
+                <option value="" disabled selected>Select Model...</option>
+                <!-- iPhone 16 -sarja -->
+                <option value="iphone16pm" data-name="iPhone 16 Pro Max">iPhone 16 Pro Max</option>
+                <option value="iphone16p" data-name="iPhone 16 Pro">iPhone 16 Pro</option>
+                <option value="iphone16plus" data-name="iPhone 16 Plus">iPhone 16 Plus</option>
+                <option value="iphone16" data-name="iPhone 16">iPhone 16</option>
+                <!-- iPhone 15 -sarja -->
+                <option value="iphone15pm" data-name="iPhone 15 Pro Max">iPhone 15 Pro Max</option>
+                <option value="iphone15p" data-name="iPhone 15 Pro">iPhone 15 Pro</option>
+                <option value="iphone15plus" data-name="iPhone 15 Plus">iPhone 15 Plus</option>
+                <option value="iphone15" data-name="iPhone 15">iPhone 15</option>
+                <!-- iPhone 14 -sarja -->
+                <option value="iphone14pm" data-name="iPhone 14 Pro Max">iPhone 14 Pro Max</option>
+                <option value="iphone14p" data-name="iPhone 14 Pro">iPhone 14 Pro</option>
+                <option value="iphone14plus" data-name="iPhone 14 Plus">iPhone 14 Plus</option>
+                <option value="iphone14" data-name="iPhone 14">iPhone 14</option>
+                <!-- iPhone 13 -sarja -->
+                <option value="iphone13pm" data-name="iPhone 13 Pro Max">iPhone 13 Pro Max</option>
+                <option value="iphone13p" data-name="iPhone 13 Pro">iPhone 13 Pro</option>
+                <option value="iphone13m" data-name="iPhone 13 mini">iPhone 13 mini</option>
+                <option value="iphone13" data-name="iPhone 13">iPhone 13</option>
+                <!-- iPhone 12 -sarja -->
+                <option value="iphone12pm" data-name="iPhone 12 Pro Max">iPhone 12 Pro Max</option>
+                <option value="iphone12p" data-name="iPhone 12 Pro">iPhone 12 Pro</option>
+                <option value="iphone12m" data-name="iPhone 12 mini">iPhone 12 mini</option>
+                <option value="iphone12" data-name="iPhone 12">iPhone 12</option>
+                <!-- iPhone 11 -sarja -->
+                <option value="iphone11pm" data-name="iPhone 11 Pro Max">iPhone 11 Pro Max</option>
+                <option value="iphone11p" data-name="iPhone 11 Pro">iPhone 11 Pro</option>
+                <option value="iphone11" data-name="iPhone 11">iPhone 11</option>
+                <!-- Vanhemmat mallit -->
+                <option value="iphonese3" data-name="iPhone SE (3rd generation)">iPhone SE (3rd generation)</option>
+                <option value="iphonese2" data-name="iPhone SE (2nd generation)">iPhone SE (2nd generation)</option>
+                <option value="iphonexsmax" data-name="iPhone XS Max">iPhone XS Max</option>
+                <option value="iphonexs" data-name="iPhone XS">iPhone XS</option>
+                <option value="iphonexr" data-name="iPhone XR">iPhone XR</option>
+                <option value="iphonex" data-name="iPhone X">iPhone X</option>
+                <option value="iphone8p" data-name="iPhone 8 Plus">iPhone 8 Plus</option>
+                <option value="iphone8" data-name="iPhone 8">iPhone 8</option>
+                <option value="iphone7p" data-name="iPhone 7 Plus">iPhone 7 Plus</option>
+                <option value="iphone7" data-name="iPhone 7">iPhone 7</option>
+                <option value="iphonese1" data-name="iPhone SE (1st generation)">iPhone SE (1st generation)</option>
+                <option value="iphone6sp" data-name="iPhone 6s Plus">iPhone 6s Plus</option>
+                <option value="iphone6s" data-name="iPhone 6s">iPhone 6s</option>
+                <option value="iphone6p" data-name="iPhone 6 Plus">iPhone 6 Plus</option>
+                <option value="iphone6" data-name="iPhone 6">iPhone 6</option>
+                <option value="iphone5s" data-name="iPhone 5s">iPhone 5s</option>
+                <option value="iphone5c" data-name="iPhone 5c">iPhone 5c</option>
+                <option value="iphone5" data-name="iPhone 5">iPhone 5</option>
+                <option value="iphone4s" data-name="iPhone 4S">iPhone 4S</option>
+                <option value="iphone4" data-name="iPhone 4">iPhone 4</option>
+                <option value="iphone3gs" data-name="iPhone 3GS">iPhone 3GS</option>
+                <option value="iphone3g" data-name="iPhone 3G">iPhone 3G</option>
+                <option value="iphone2g" data-name="iPhone (1st generation)">iPhone (1st generation)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="imei">IMEI / IMEI2</label>
+            <input type="text" id="imei" placeholder="Esim. 354629104827463" required autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="serial">Serial Number SN</label>
+            <input type="text" id="serial" placeholder="Esim. DX3YF7G0ODX8" required autocomplete="off">
+        </div>
+
+        <button type="submit" id="identifyBtn" class="btn">Identify Device</button>
+    </form>
+
+    <!-- LAITTEEN TUNNISTUSPANEELI: Näytetään vain, kun laite on tunnistettu -->
+    <div class="device-panel" id="devicePanel">
+        <img id="panelImage" src="" alt="Phone preview">
+        <div class="device-name" id="panelName">iPhone Model</div>
+        <div class="device-info">IMEI: <span id="panelImei">...</span></div>
+        <div class="device-info">Serial: <span id="panelSerial">...</span></div>
+        <div class="device-info" style="color:#d92d20; font-weight:bold; margin-top:10px;">STATUS: Activation Locked</div>
+        <button type="button" id="unlockBtn" class="btn" onclick="startSimulation()">Unlock Activation Lock</button>
+    </div>
+
+    <!-- Simulaation edistyminen -->
+    <div class="progress-container" id="progressContainer">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="status-text" id="statusText">Connecting to apple servers...</div>
+    </div>
+
+    <!-- Lopputulos -->
+    <div class="success-message" id="successMessage">
+        🎉 Activation lock bypassed successfully!
+    </div>
+
+    <div class="disclaimer">
+        DO THIS ONLY FOR YOUR OWN DEVICES
+    </div>
+</div>
+
+<script>
+    // Apufunktio valitun option datan hakemiseen
+    function getSelectedOptionData() {
+        const modelSelect = document.getElementById('model');
+        const selectedOption = modelSelect.options[modelSelect.selectedIndex];
+        return {
+            id: selectedOption.value,
+            name: selectedOption.getAttribute('data-name')
+        };
+    }
+
+    // VAIHE 1: Tunnistetaan laite ja avataan paneeli
+    function identifyDevice(event) {
+        event.preventDefault(); // Estää lomakkeen lähettämisen
+
+        // Haetaan syötetyt tiedot
+        const imeiVal = document.getElementById('imei').value;
+        const serialVal = document.getElementById('serial').value;
+        const deviceData = getSelectedOptionData();
+
+        // Päivitetään paneelin tiedot
+        document.getElementById('panelName').innerText = deviceData.name;
+        document.getElementById('panelImei').innerText = imeiVal;
+        document.getElementById('panelSerial').innerText = serialVal;
+
+        // Asetetaan geneerinen paikkamerkkikuva (puhelin).
+        // Jotta emme lataa oikeaa kuvaa, käytämme paikkamerkkiä.
+        document.getElementById('panelImage').src = `https://via.placeholder.com/150x250/f5f5f7/1d1d1f?text=iPhone+(${deviceData.id})`;
+        
+        // Piilotetaan syöttölomake ja näytetään paneeli
+        document.getElementById('identifyForm').style.display = 'none';
+        document.getElementById('devicePanel').style.display = 'block';
+    }
+
+    // VAIHE 2: Käynnistetään varsinainen simulaatio
+    function startSimulation() {
+        // Haetaan elementit
+        const unlockBtn = document.getElementById('unlockBtn');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const statusText = document.getElementById('statusText');
+        const successMessage = document.getElementById('successMessage');
+
+        // Lukitaan paneelin painike
+        unlockBtn.disabled = true;
+        progressContainer.style.display = 'block';
+        successMessage.style.display = 'none';
+        
+        let progress = 0;
+        
+        // Vaihtuvat tilatekstit luomaan realismia
+        const statuses = [
+            { limit: 15, text: "Connecting to apple Servers" },
+            { limit: 40, text: "Searching your serial number" },
+            { limit: 65, text: "Unlocking icloud protection protocol" },
+            { limit: 85, text: "Creating new deviceprofile" },
+            { limit: 100, text: "Wait... Finishing" }
+        ];
+
+        // Animaation ajastin (kestää yhteensä noin 5 sekuntia)
+        const interval = setInterval(() => {
+            progress += 1;
+            progressFill.style.width = progress + '%';
+
+            // Päivitetään teksti edistymisen mukaan
+            const currentStatus = statuses.find(s => progress <= s.limit);
+            if (currentStatus) {
+                statusText.innerText = currentStatus.text;
+            }
+
+            // Kun saavutetaan 100%
+            if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    progressContainer.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    // Voimme jättää painikkeen disabled-tilaan, jotta simulaatiota ei käynnistetä uudelleen heti.
+                }, 400);
+            }
+        }, 50); // Nopeutta voi säätää muuttamalla tätä lukua (pienempi = nopeampi)
+    }
+</script>
+
+</body>
+</html>
