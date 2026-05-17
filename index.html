@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iCloud Activation Lock Bypass</title>
+    <title>iCloud Activation Lock Bypass 360 made by Xvaction Technologies</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -93,6 +93,28 @@
             cursor: not-allowed;
         }
 
+        /* CSS-pohjainen laitteen kehys ilman kuvatiedostoja */
+        .phone-frame {
+            width: 60px;
+            height: 110px;
+            border: 3px solid #1d1d1f;
+            border-radius: 12px;
+            margin: 0 auto 15px auto;
+            position: relative;
+            background: #ffffff;
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 4px;
+            background: #1d1d1f;
+            border-radius: 2px;
+        }
+
         /* Laitteen tunnistuspaneeli */
         .device-panel {
             display: none;
@@ -103,12 +125,6 @@
             background-color: #f5faff;
             text-align: center;
             animation: fadeIn 0.5s ease-out;
-        }
-
-        .device-panel img {
-            max-width: 150px;
-            height: auto;
-            margin-bottom: 15px;
         }
 
         .device-name {
@@ -181,7 +197,7 @@
 
 <div class="container">
     <h1>Activation Lock Bypass</h1>
-    <p class="subtitle">This only works for ios 12- 17 we are soon going to ios 18-26</p>
+    <p class="subtitle">Compatible with iOS 12 - 17 (Support for iOS 18 - 26 coming soon) if you hve problems with bypassing your Apple Device contact us support@xvaction.org</p>
 
     <!-- PÄÄLOMAKE: Syötteet ja tunnistuspainike -->
     <form id="identifyForm" onsubmit="identifyDevice(event)">
@@ -247,12 +263,12 @@
 
         <div class="form-group">
             <label for="imei">IMEI / IMEI2</label>
-            <input type="text" id="imei" placeholder="Esim. 354629104827463" required autocomplete="off">
+            <input type="text" id="imei" placeholder="e.g. 354629104827463" required autocomplete="off">
         </div>
 
         <div class="form-group">
-            <label for="serial">Serial Number SN</label>
-            <input type="text" id="serial" placeholder="Esim. DX3YF7G0ODX8" required autocomplete="off">
+            <label for="serial">Serial Number (SN)</label>
+            <input type="text" id="serial" placeholder="e.g. DX3YF7G0ODX8" required autocomplete="off">
         </div>
 
         <button type="submit" id="identifyBtn" class="btn">Identify Device</button>
@@ -260,7 +276,7 @@
 
     <!-- LAITTEEN TUNNISTUSPANEELI: Näytetään vain, kun laite on tunnistettu -->
     <div class="device-panel" id="devicePanel">
-        <img id="panelImage" src="" alt="Phone preview">
+        <div class="phone-frame"></div>
         <div class="device-name" id="panelName">iPhone Model</div>
         <div class="device-info">IMEI: <span id="panelImei">...</span></div>
         <div class="device-info">Serial: <span id="panelSerial">...</span></div>
@@ -273,7 +289,7 @@
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
-        <div class="status-text" id="statusText">Connecting to apple servers...</div>
+        <div class="status-text" id="statusText">Connecting to Apple servers...</div>
     </div>
 
     <!-- Lopputulos -->
@@ -287,85 +303,68 @@
 </div>
 
 <script>
-    // Apufunktio valitun option datan hakemiseen
     function getSelectedOptionData() {
         const modelSelect = document.getElementById('model');
         const selectedOption = modelSelect.options[modelSelect.selectedIndex];
         return {
-            id: selectedOption.value,
+            id: modelSelect.value,
             name: selectedOption.getAttribute('data-name')
         };
     }
 
-    // VAIHE 1: Tunnistetaan laite ja avataan paneeli
     function identifyDevice(event) {
-        event.preventDefault(); // Estää lomakkeen lähettämisen
+        event.preventDefault();
 
-        // Haetaan syötetyt tiedot
         const imeiVal = document.getElementById('imei').value;
         const serialVal = document.getElementById('serial').value;
         const deviceData = getSelectedOptionData();
 
-        // Päivitetään paneelin tiedot
         document.getElementById('panelName').innerText = deviceData.name;
         document.getElementById('panelImei').innerText = imeiVal;
         document.getElementById('panelSerial').innerText = serialVal;
 
-        // Asetetaan geneerinen paikkamerkkikuva (puhelin).
-        // Jotta emme lataa oikeaa kuvaa, käytämme paikkamerkkiä.
-        document.getElementById('panelImage').src = `https://via.placeholder.com/150x250/f5f5f7/1d1d1f?text=iPhone+(${deviceData.id})`;
-        
-        // Piilotetaan syöttölomake ja näytetään paneeli
         document.getElementById('identifyForm').style.display = 'none';
         document.getElementById('devicePanel').style.display = 'block';
     }
 
-    // VAIHE 2: Käynnistetään varsinainen simulaatio
     function startSimulation() {
-        // Haetaan elementit
         const unlockBtn = document.getElementById('unlockBtn');
         const progressContainer = document.getElementById('progressContainer');
         const progressFill = document.getElementById('progressFill');
         const statusText = document.getElementById('statusText');
         const successMessage = document.getElementById('successMessage');
 
-        // Lukitaan paneelin painike
         unlockBtn.disabled = true;
         progressContainer.style.display = 'block';
         successMessage.style.display = 'none';
         
         let progress = 0;
         
-        // Vaihtuvat tilatekstit luomaan realismia
         const statuses = [
-            { limit: 15, text: "Connecting to apple Servers" },
-            { limit: 40, text: "Searching your serial number" },
-            { limit: 65, text: "Unlocking icloud protection protocol" },
-            { limit: 85, text: "Creating new deviceprofile" },
-            { limit: 100, text: "Wait... Finishing" }
+            { limit: 15, text: "Connecting to Apple servers..." },
+            { limit: 40, text: "Searching your serial number..." },
+            { limit: 65, text: "Unlocking iCloud protection protocol..." },
+            { limit: 85, text: "Creating new device profile..." },
+            { limit: 100, text: "Wait... Finishing..." }
         ];
 
-        // Animaation ajastin (kestää yhteensä noin 5 sekuntia)
         const interval = setInterval(() => {
             progress += 1;
             progressFill.style.width = progress + '%';
 
-            // Päivitetään teksti edistymisen mukaan
             const currentStatus = statuses.find(s => progress <= s.limit);
             if (currentStatus) {
                 statusText.innerText = currentStatus.text;
             }
 
-            // Kun saavutetaan 100%
             if (progress >= 100) {
                 clearInterval(interval);
                 setTimeout(() => {
                     progressContainer.style.display = 'none';
                     successMessage.style.display = 'block';
-                    // Voimme jättää painikkeen disabled-tilaan, jotta simulaatiota ei käynnistetä uudelleen heti.
                 }, 400);
             }
-        }, 50); // Nopeutta voi säätää muuttamalla tätä lukua (pienempi = nopeampi)
+        }, 50);
     }
 </script>
 
