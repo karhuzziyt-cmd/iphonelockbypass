@@ -3,240 +3,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iCloud Activation Lock Bypass 360 made by Xvaction Technologies</title>
+    <title>iCloud Activation Lock Bypass 360 - Xvaction Technologies</title>
     <style>
+        :root {
+            --brand-primary: #0071e3;
+            --brand-neon: #00d2ff;
+            --dark-bg: #0f1115;
+            --card-bg: #1a1d24;
+            --text-main: #f5f5f7;
+            --text-muted: #86868b;
+            --border-color: #2e3440;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f5f5f7;
-            color: #1d1d1f;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .container {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            background: var(--card-bg);
+            padding: 40px 35px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 2px rgba(0, 113, 227, 0.4);
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
             box-sizing: border-box;
             text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Xvaction Logo & Header */
+        .brand-header {
+            margin-bottom: 30px;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-neon));
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(0, 113, 227, 0.3);
+            letter-spacing: -1px;
         }
 
         h1 {
             font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 10px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #ffffff, #a1a1a6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        p.subtitle {
-            color: #86868b;
-            font-size: 14px;
-            margin-bottom: 25px;
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 0;
         }
 
+        .subtitle a {
+            color: var(--brand-neon);
+            text-decoration: none;
+        }
+
+        .subtitle a:hover {
+            text-decoration: underline;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 25px 0;
+        }
+
+        /* Form Controls */
         .form-group {
             text-align: left;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #515154;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #a1a1a6;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
         input, select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #d2d2d7;
-            border-radius: 10px;
-            font-size: 16px;
-            background-color: #fbfbfd;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 15px;
+            background-color: #252932;
+            color: #ffffff;
             box-sizing: border-box;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.2s ease;
         }
 
         input:focus, select:focus {
-            border-color: #0071e3;
+            border-color: var(--brand-primary);
+            background-color: #2a303b;
+            box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.25);
+        }
+
+        select option {
+            background-color: var(--card-bg);
+            color: #ffffff;
         }
 
         .btn {
             width: 100%;
-            padding: 14px;
-            background-color: #0071e3;
+            padding: 15px;
+            background: linear-gradient(to bottom, var(--brand-primary), #0062c4);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 15px;
-            transition: background-color 0.2s;
+            margin-top: 10px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.2);
         }
 
         .btn:hover {
-            background-color: #0077ed;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(0, 113, 227, 0.3);
         }
 
         .btn:disabled {
-            background-color: #99c9f7;
+            background: #3a3f4d;
+            color: #747a8a;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
-        /* CSS-pohjainen laitteen kehys ilman kuvatiedostoja */
+        /* Device Preview Animation Graphics */
         .phone-frame {
-            width: 60px;
-            height: 110px;
-            border: 3px solid #1d1d1f;
-            border-radius: 12px;
+            width: 55px;
+            height: 100px;
+            border: 3px solid #a1a1a6;
+            border-radius: 14px;
             margin: 0 auto 15px auto;
             position: relative;
-            background: #ffffff;
+            background: #111215;
+            box-shadow: 0 0 15px rgba(217, 45, 32, 0.2);
         }
+        
         .phone-frame::before {
             content: '';
             position: absolute;
-            top: 4px;
+            top: 5px;
             left: 50%;
             transform: translateX(-50%);
-            width: 20px;
+            width: 18px;
             height: 4px;
-            background: #1d1d1f;
+            background: #a1a1a6;
             border-radius: 2px;
         }
 
-        /* Laitteen tunnistuspaneeli */
+        /* Device Panel Box */
         .device-panel {
             display: none;
-            margin-top: 25px;
-            padding: 20px;
-            border: 2px solid #0071e3;
-            border-radius: 15px;
-            background-color: #f5faff;
+            margin-top: 10px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            background-color: #21252e;
             text-align: center;
-            animation: fadeIn 0.5s ease-out;
+            animation: fadeIn 0.4s ease-out;
         }
 
         .device-name {
             font-size: 20px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            color: #ffffff;
         }
 
-        .device-info {
-            font-size: 14px;
-            color: #515154;
-            margin-bottom: 5px;
+        .info-table {
+            background: #16191f;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #2e3440;
         }
 
-        /* Latauspalkki */
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        .info-row:last-child { margin-bottom: 0; }
+        .info-label { color: var(--text-muted); }
+        .info-value { font-weight: 600; font-family: monospace; color: #ffffff; }
+
+        /* Progress Reporting */
         .progress-container {
             display: none;
             margin-top: 25px;
+            background: #16191f;
+            padding: 20px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
         }
 
         .progress-bar {
             width: 100%;
-            background-color: #e5e5ea;
-            border-radius: 10px;
+            background-color: #2e3440;
+            border-radius: 6px;
             overflow: hidden;
-            height: 12px;
-            margin-bottom: 10px;
+            height: 8px;
+            margin-bottom: 12px;
         }
 
         .progress-fill {
             height: 100%;
             width: 0%;
-            background-color: #34c759;
+            background: linear-gradient(to right, var(--brand-primary), var(--brand-neon));
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
             transition: width 0.1s linear;
         }
 
         .status-text {
-            font-size: 14px;
-            color: #86868b;
+            font-size: 13px;
+            color: #00d2ff;
             font-weight: 500;
+            font-family: monospace;
         }
 
-        /* Onnistumisviesti */
+        /* Success Screen */
         .success-message {
             display: none;
             margin-top: 25px;
-            padding: 15px;
-            background-color: #eafaf1;
+            padding: 20px;
+            background-color: rgba(52, 199, 89, 0.1);
             border: 1px solid #34c759;
-            border-radius: 10px;
-            color: #1a7f37;
+            border-radius: 14px;
+            color: #34c759;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
+            line-height: 1.5;
             animation: fadeIn 0.5s ease-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .disclaimer {
             font-size: 11px;
-            color: #b6b6b9;
-            margin-top: 25px;
+            color: var(--text-muted);
+            margin-top: 30px;
+            line-height: 1.4;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Activation Lock Bypass</h1>
-    <p class="subtitle">Compatible with iOS 12 - 17 (Support for iOS 18 - 26 coming soon) if you hve problems with bypassing your Apple Device contact us support@xvaction.org</p>
+    <!-- Brand identity header -->
+    <div class="brand-header">
+        <div class="brand-logo">X</div>
+        <h1>Xvaction Bypass 360</h1>
+        <p class="subtitle">
+            Advanced Security Automated Console v4.2<br>
+            Need help? Contact <a href="mailto:support@xvaction.org">support@xvaction.org</a>
+        </p>
+    </div>
 
-    <!-- PÄÄLOMAKE: Syötteet ja tunnistuspainike -->
+    <div class="divider"></div>
+
+    <!-- MAIN CONSOLE INPUT FORM -->
     <form id="identifyForm" onsubmit="identifyDevice(event)">
         <div class="form-group">
-            <label for="model">iPhone Model</label>
+            <label for="model">Target Apple Device</label>
             <select id="model" required>
-                <option value="" disabled selected>Select Model...</option>
-                <!-- iPhone 16 -sarja -->
-                <option value="iphone16pm" data-name="iPhone 16 Pro Max">iPhone 16 Pro Max</option>
-                <option value="iphone16p" data-name="iPhone 16 Pro">iPhone 16 Pro</option>
-                <option value="iphone16plus" data-name="iPhone 16 Plus">iPhone 16 Plus</option>
-                <option value="iphone16" data-name="iPhone 16">iPhone 16</option>
-                <!-- iPhone 15 -sarja -->
+                <option value="" disabled selected>Select hardware architecture...</option>
+                <!-- iPhone 16 Series -->
+                <option value="iphone16pm" data-name="iPhone 16 Pro Max">iPhone 16 Pro Max (Only jailbreaked)</option>
+                <option value="iphone16p" data-name="iPhone 16 Pro">iPhone 16 Pro (Only jailbreaked)</option>
+                <option value="iphone16plus" data-name="iPhone 16 Plus">iPhone 16 Plus (Only jailbreaked)</option>
+                <option value="iphone16" data-name="iPhone 16">iPhone 16 (Only jailbreaked)</option>
+                <!-- iPhone 15 Series -->
                 <option value="iphone15pm" data-name="iPhone 15 Pro Max">iPhone 15 Pro Max</option>
                 <option value="iphone15p" data-name="iPhone 15 Pro">iPhone 15 Pro</option>
                 <option value="iphone15plus" data-name="iPhone 15 Plus">iPhone 15 Plus</option>
                 <option value="iphone15" data-name="iPhone 15">iPhone 15</option>
-                <!-- iPhone 14 -sarja -->
+                <!-- iPhone 14 Series -->
                 <option value="iphone14pm" data-name="iPhone 14 Pro Max">iPhone 14 Pro Max</option>
                 <option value="iphone14p" data-name="iPhone 14 Pro">iPhone 14 Pro</option>
                 <option value="iphone14plus" data-name="iPhone 14 Plus">iPhone 14 Plus</option>
                 <option value="iphone14" data-name="iPhone 14">iPhone 14</option>
-                <!-- iPhone 13 -sarja -->
+                <!-- iPhone 13 Series -->
                 <option value="iphone13pm" data-name="iPhone 13 Pro Max">iPhone 13 Pro Max</option>
                 <option value="iphone13p" data-name="iPhone 13 Pro">iPhone 13 Pro</option>
                 <option value="iphone13m" data-name="iPhone 13 mini">iPhone 13 mini</option>
                 <option value="iphone13" data-name="iPhone 13">iPhone 13</option>
-                <!-- iPhone 12 -sarja -->
+                <!-- iPhone 12 Series -->
                 <option value="iphone12pm" data-name="iPhone 12 Pro Max">iPhone 12 Pro Max</option>
                 <option value="iphone12p" data-name="iPhone 12 Pro">iPhone 12 Pro</option>
                 <option value="iphone12m" data-name="iPhone 12 mini">iPhone 12 mini</option>
                 <option value="iphone12" data-name="iPhone 12">iPhone 12</option>
-                <!-- iPhone 11 -sarja -->
+                <!-- iPhone 11 Series -->
                 <option value="iphone11pm" data-name="iPhone 11 Pro Max">iPhone 11 Pro Max</option>
                 <option value="iphone11p" data-name="iPhone 11 Pro">iPhone 11 Pro</option>
                 <option value="iphone11" data-name="iPhone 11">iPhone 11</option>
-                <!-- Vanhemmat mallit -->
-                <option value="iphonese3" data-name="iPhone SE (3rd generation)">iPhone SE (3rd generation)</option>
-                <option value="iphonese2" data-name="iPhone SE (2nd generation)">iPhone SE (2nd generation)</option>
+                <!-- Legacy architectures -->
+                <option value="iphonese3" data-name="iPhone SE (3rd gen)">iPhone SE (3rd generation)</option>
+                <option value="iphonese2" data-name="iPhone SE (2nd gen)">iPhone SE (2nd generation)</option>
                 <option value="iphonexsmax" data-name="iPhone XS Max">iPhone XS Max</option>
                 <option value="iphonexs" data-name="iPhone XS">iPhone XS</option>
                 <option value="iphonexr" data-name="iPhone XR">iPhone XR</option>
@@ -245,60 +346,53 @@
                 <option value="iphone8" data-name="iPhone 8">iPhone 8</option>
                 <option value="iphone7p" data-name="iPhone 7 Plus">iPhone 7 Plus</option>
                 <option value="iphone7" data-name="iPhone 7">iPhone 7</option>
-                <option value="iphonese1" data-name="iPhone SE (1st generation)">iPhone SE (1st generation)</option>
-                <option value="iphone6sp" data-name="iPhone 6s Plus">iPhone 6s Plus</option>
-                <option value="iphone6s" data-name="iPhone 6s">iPhone 6s</option>
-                <option value="iphone6p" data-name="iPhone 6 Plus">iPhone 6 Plus</option>
-                <option value="iphone6" data-name="iPhone 6">iPhone 6</option>
-                <option value="iphone5s" data-name="iPhone 5s">iPhone 5s</option>
-                <option value="iphone5c" data-name="iPhone 5c">iPhone 5c</option>
-                <option value="iphone5" data-name="iPhone 5">iPhone 5</option>
-                <option value="iphone4s" data-name="iPhone 4S">iPhone 4S</option>
-                <option value="iphone4" data-name="iPhone 4">iPhone 4</option>
-                <option value="iphone3gs" data-name="iPhone 3GS">iPhone 3GS</option>
-                <option value="iphone3g" data-name="iPhone 3G">iPhone 3G</option>
-                <option value="iphone2g" data-name="iPhone (1st generation)">iPhone (1st generation)</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label for="imei">IMEI / IMEI2</label>
-            <input type="text" id="imei" placeholder="e.g. 354629104827463" required autocomplete="off">
+            <label for="imei">Hardware IMEI Identifier</label>
+            <input type="text" id="imei" placeholder="Enter 15-digit IMEI baseline" required autocomplete="off">
         </div>
 
         <div class="form-group">
-            <label for="serial">Serial Number (SN)</label>
-            <input type="text" id="serial" placeholder="e.g. DX3YF7G0ODX8" required autocomplete="off">
+            <label for="serial">Device Serial Number (SN)</label>
+            <input type="text" id="serial" placeholder="Enter hardware serial number" required autocomplete="off">
         </div>
 
-        <button type="submit" id="identifyBtn" class="btn">Identify Device</button>
+        <button type="submit" id="identifyBtn" class="btn">Analyze Hardware Config</button>
     </form>
 
-    <!-- LAITTEEN TUNNISTUSPANEELI: Näytetään vain, kun laite on tunnistettu -->
+    <!-- XVACTION DEVICE DIAGNOSTIC PANEL -->
     <div class="device-panel" id="devicePanel">
         <div class="phone-frame"></div>
-        <div class="device-name" id="panelName">iPhone Model</div>
-        <div class="device-info">IMEI: <span id="panelImei">...</span></div>
-        <div class="device-info">Serial: <span id="panelSerial">...</span></div>
-        <div class="device-info" style="color:#d92d20; font-weight:bold; margin-top:10px;">STATUS: Activation Locked</div>
-        <button type="button" id="unlockBtn" class="btn" onclick="startSimulation()">Unlock Activation Lock</button>
+        <div class="device-name" id="panelName">iPhone Target</div>
+        
+        <div class="info-table">
+            <div class="info-row"><span class="info-label">IMEI Node:</span><span class="info-value" id="panelImei">...</span></div>
+            <div class="info-row"><span class="info-label">Serial Key:</span><span class="info-value" id="panelSerial">...</span></div>
+            <div class="info-row"><span class="info-label">System Security:</span><span class="info-value" style="color:#d92d20;">Enforced</span></div>
+            <div class="info-row"><span class="info-label">iCloud Status:</span><span class="info-value" style="color:#d92d20; font-weight: bold;">ACTIVATION LOCKED</span></div>
+        </div>
+        
+        <button type="button" id="unlockBtn" class="btn" onclick="startSimulation()">Initialize Bypass Protocol</button>
     </div>
 
-    <!-- Simulaation edistyminen -->
+    <!-- REAL-TIME PROCESSING TELEMETRY -->
     <div class="progress-container" id="progressContainer">
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
-        <div class="status-text" id="statusText">Connecting to Apple servers...</div>
+        <div class="status-text" id="statusText">Awaiting terminal initialization...</div>
     </div>
 
-    <!-- Lopputulos -->
+    <!-- OPERATION SUCCESS SCREEN -->
     <div class="success-message" id="successMessage">
-        🎉 Activation lock bypassed successfully!
+        <strong>SUCCESS: DE-ACTIVATION COMPLETE</strong><br>
+        iCloud Activation Lock security layer successfully stripped from device environment via Xvaction 360 Core.
     </div>
 
     <div class="disclaimer">
-        DO THIS ONLY FOR YOUR OWN DEVICES
+        <strong>LEGAL COMPLIANCE:</strong> Automated deployment utility provided by Xvaction Technologies. Run strictly on authentic, end-user authorized target systems.
     </div>
 </div>
 
@@ -335,17 +429,19 @@
         const successMessage = document.getElementById('successMessage');
 
         unlockBtn.disabled = true;
+        progressContainer.style.with = 'block';
         progressContainer.style.display = 'block';
         successMessage.style.display = 'none';
         
         let progress = 0;
         
         const statuses = [
-            { limit: 15, text: "Connecting to Apple servers..." },
-            { limit: 40, text: "Searching your serial number..." },
-            { limit: 65, text: "Unlocking iCloud protection protocol..." },
-            { limit: 85, text: "Creating new device profile..." },
-            { limit: 100, text: "Wait... Finishing..." }
+            { limit: 12, text: "[SYS] Opening payload terminal links..." },
+            { limit: 28, text: "[ALGS] Extracting hardware secure enclave keys..." },
+            { limit: 48, text: "[RE-ENG] De-authorizing activation lock vectors..." },
+            { limit: 70, text: "[NETWORK] Spoofing clean cryptographic ticket responses..." },
+            { limit: 88, text: "[MEM] Overwriting non-volatile configuration memory..." },
+            { limit: 100, text: "[SUCCESS] Flushing hardware environment logs..." }
         ];
 
         const interval = setInterval(() => {
@@ -362,9 +458,9 @@
                 setTimeout(() => {
                     progressContainer.style.display = 'none';
                     successMessage.style.display = 'block';
-                }, 400);
+                }, 500);
             }
-        }, 50);
+        }, 50); // Prosessi kestää noin 5 sekuntia
     }
 </script>
 
